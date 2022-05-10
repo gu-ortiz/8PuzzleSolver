@@ -1,7 +1,7 @@
 from entities.node import Node
 
 
-class VisitedNodes:
+class Border:
   def __init__(self) -> None:
     self.__list = []
 
