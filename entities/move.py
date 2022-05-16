@@ -16,10 +16,8 @@ class Move:
 
     @origin.setter
     def origin(self, value: Position) -> None:
-        if isinstance(value, Position):
-            self.__origin = value
+        self.__origin = value
 
     @destiny.setter
     def destiny(self, value: Position) -> None:
-        if isinstance(value, Position):
-            self.__destiny = value
+        self.__destiny = value

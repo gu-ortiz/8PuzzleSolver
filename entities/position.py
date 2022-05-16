@@ -16,10 +16,8 @@ class Position:
 
     @value.setter
     def value(self, value: int) -> None:
-        if isinstance(value, int):
-            self.__value = value
+        self.__value = value
 
     @coordenate.setter
     def coordenate(self, value: Coordenate) -> None:
-        if isinstance(value, Coordenate):
-            self.__coordenate = value
+        self.__coordenate = value

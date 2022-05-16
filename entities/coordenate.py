@@ -16,15 +16,13 @@ class Coordenate:
 
     @x.setter
     def x(self, value: int) -> None:
-        if isinstance(value, int):
-            self.__x = value
+        self.__x = value
 
     @y.setter
     def y(self, value: int) -> None:
-        if isinstance(value, int):
-            self.__y = value
+        self.__y = value
 
-    def get_axis(self):
+    def get_axis(self) -> tuple[int, int]:
         return self.__x, self.__y
 
     def valid_coordenate(self) -> bool:
