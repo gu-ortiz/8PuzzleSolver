@@ -8,8 +8,8 @@ class PuzzleSolver:
     def __init__(self) -> None:
         self.__border: list[Board] = []
         self.__visited_nodes: list[Board] = []
-        self.__total_nodes_created = 1
-        self.__border_highest_size = 1
+        self.__total_nodes_created = 0
+        self.__border_highest_size = 0
 
     def create_board(self, starting_matrix: list[list[Position]], result_matrix: list[list[Position]]) -> tuple[Board, Board]:
         return Board(starting_matrix), Board(result_matrix)
@@ -56,6 +56,9 @@ class PuzzleSolver:
 
     def resolve_board(self, result_board: Board, algorithm=position_length_to_destiny) -> None:
         while True:
+            if len(self.__border) > self.__border_highest_size:
+                self.__border_highest_size = len(self.__border)
+
             if self.check_for_win_condition(result_board):
                 break
 
