@@ -1,10 +1,11 @@
 BOARD_SIZE = 3
 
-# 0 defines an empty space
+ALGORITHM = 1
+
 EXAMPLE_BOARD = [
-    [3, 0, 6],
-    [1, 5, 8],
-    [4, 2, 7]
+    [3, 6, 8],
+    [1, 2, 5],
+    [4, 7, 0]
 ]
 
 EXPECTED_RESULT = [

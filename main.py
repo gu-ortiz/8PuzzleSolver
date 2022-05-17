@@ -1,12 +1,12 @@
 from controllers.puzzle_solver import PuzzleSolver
-from settings import EXAMPLE_BOARD, EXPECTED_RESULT
+from settings import EXAMPLE_BOARD, EXPECTED_RESULT, ALGORITHM
 
 
 def run_eights_game():
     payload = {
         'starting_matrix': EXAMPLE_BOARD,
         'result_matrix': EXPECTED_RESULT,
-        'algorithm': 1
+        'algorithm': ALGORITHM
     }
     PuzzleSolver().run_solution(payload)
 

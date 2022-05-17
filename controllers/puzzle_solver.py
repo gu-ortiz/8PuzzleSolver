@@ -93,6 +93,7 @@ class PuzzleSolver:
 
         self.__border.append(starting_board)
         self.__visited_nodes.append(starting_board)
+        self.__total_nodes_created += 1
 
         self.resolve_board(result_board, algorithm_dispatch[payload.get('algorithm')])
 
