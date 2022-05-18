@@ -12,20 +12,7 @@ class PuzzleSolver:
         self.__frontier_highest_size = 0
 
     def create_board(self, starting_matrix: list[list[Position]], result_matrix: list[list[Position]]) -> tuple[Board, Board]:
-        return Board(starting_matrix), Board(result_matrix)
-
-    def get_best_expansion(self, result_board: Board, algorithm: callable) -> (Board | None):
-        best_expansion: (Board | None) = None
-
-        for board in self.__frontier:
-            if not best_expansion:
-                best_expansion = board
-            else:
-                best_expansion = board if (
-                    algorithm(board, result_board) < algorithm(best_expansion, result_board)
-                ) else best_expansion
-
-        return best_expansion
+        return Board(starting_matrix, []), Board(result_matrix, [])
 
     def check_board_in_list(self, board: Board, list: list[Board]) -> bool:
         for item in list:
@@ -40,6 +27,19 @@ class PuzzleSolver:
 
         return False
 
+    def get_best_expansion(self, result_board: Board, algorithm: callable) -> (Board | None):
+        best_expansion: (Board | None) = None
+
+        for board in self.__frontier:
+            if not best_expansion:
+                best_expansion = board
+            else:
+                best_expansion = board if (
+                    algorithm(board, result_board) < algorithm(best_expansion, result_board)
+                ) else best_expansion
+
+        return best_expansion
+
     def visit_board(self, board: Board, result_board: Board) -> None:
         self.__frontier = [item for item in self.__frontier if item.get_board_string() != board.get_board_string()]
         self.__visited.append(board)
@@ -49,8 +49,7 @@ class PuzzleSolver:
 
         for move in board.moves:
             new_board = board.apply_move_to_board(move)
-            new_board.moves = new_board.get_possible_moves()
-            if not self.check_board_in_list(board, self.__frontier) and not self.check_board_in_list(board, self.__visited):
+            if not self.check_board_in_list(new_board, self.__frontier) and not self.check_board_in_list(new_board, self.__visited):
                 self.__frontier.append(new_board)
                 self.__total_boards_created += 1
 

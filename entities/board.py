@@ -1,14 +1,14 @@
 from __future__ import annotations
+from settings import BOARD_SIZE
 from entities.coordenate import Coordenate
 from entities.position import Position
 from entities.move import Move
-from settings import BOARD_SIZE
 from random import randrange
 import copy
 
 
 class Board:
-    def __init__(self, matrix=None) -> None:
+    def __init__(self, matrix: (list[list[Position]] | None), path: list[str]) -> None:
         if not matrix:
             self.__matrix = self.create_board(
                 self.create_random_matrix()
@@ -16,7 +16,7 @@ class Board:
         else:
             self.__matrix = self.create_board(matrix)
         self.__moves = self.get_possible_moves()
-        self.__path = []
+        self.__path = path
 
     @property
     def matrix(self) -> list[list[Position]]:
@@ -27,7 +27,7 @@ class Board:
         return self.__moves
 
     @property
-    def path(self) -> list:
+    def path(self) -> list[str]:
         return self.__path
 
     @matrix.setter
@@ -35,11 +35,11 @@ class Board:
         self.__matrix = value
 
     @moves.setter
-    def moves(self, value: list) -> None:
+    def moves(self, value: list[Move]) -> None:
         self.__moves = value
 
     @path.setter
-    def path(self, value: list) -> None:
+    def path(self, value: list[str]) -> None:
         self.__path = value
 
     def create_board(self, matrix: list[list[int]]) -> list[list[Position]]:
@@ -65,13 +65,22 @@ class Board:
         return board
 
     def get_board_string(self) -> str:
-        board_print = [[] for i in range(BOARD_SIZE)]
+        board = [[] for i in range(BOARD_SIZE)]
 
         for line_index, line in enumerate(self.__matrix):
             for position in line:
-                board_print[line_index].append(position.value)
+                board[line_index].append(position.value)
 
-        return str(board_print)
+        return str(board)
+
+    def get_board_int(self) -> list[list[int]]:
+        board = [[] for i in range(BOARD_SIZE)]
+
+        for line_index, line in enumerate(self.__matrix):
+            for position in line:
+                board[line_index].append(position.value)
+
+        return board
 
     def get_possible_moves(self) -> list:
         empty_position = self.find_position_by_value(0)
@@ -99,17 +108,19 @@ class Board:
                     return self.__matrix[line_index][position_index]
 
     def apply_move_to_board(self, move: Move) -> Board:
-        # TODO Refactor this method
-        new_board: Board = copy.deepcopy(self)
+        new_matrix: list[list[int]] = self.get_board_int()
+        new_path: list[str] = copy.deepcopy(self.__path)
 
         x, y = move.origin.coordenate.get_axis()
         x1, y1 = move.destiny.coordenate.get_axis()
 
-        new_board.matrix[y][x] = copy.deepcopy(self.__matrix[y1][x1])
-        new_board.matrix[y][x].coordenate.x, new_board.matrix[y][x].coordenate.y = copy.copy(x), copy.copy(y)
-        new_board.matrix[y1][x1] = copy.deepcopy(self.__matrix[y][x])
-        new_board.matrix[y1][x1].coordenate.x, new_board.matrix[y1][x1].coordenate.y = copy.copy(x1), copy.copy(y1)
+        new_matrix[y][x] = copy.copy(self.__matrix[y1][x1].value)
+        new_matrix[y1][x1] = copy.copy(self.__matrix[y][x].value)
 
+        new_board: Board = Board(
+            new_matrix,
+            new_path
+        )
         new_board.path.append(self.get_board_string())
 
         return new_board

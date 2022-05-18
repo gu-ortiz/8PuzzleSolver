@@ -1,11 +1,11 @@
 BOARD_SIZE = 3
 
-ALGORITHM = 1
+ALGORITHM = 2
 
 EXAMPLE_BOARD = [
-    [3, 6, 8],
-    [1, 2, 5],
-    [4, 7, 0]
+    [0, 1, 3],
+    [8, 6, 2],
+    [5, 4, 7]
 ]
 
 EXPECTED_RESULT = [
