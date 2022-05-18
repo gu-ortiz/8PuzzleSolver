@@ -1,4 +1,4 @@
-from controllers.algorithm import board_length_to_destiny, position_length_to_destiny, uniform_cost
+from controllers.algorithm import best_possible_heuristic, simple_heuristic, uniform_cost
 from entities.position import Position
 from entities.board import Board
 from entities.move import Move
@@ -85,8 +85,8 @@ class PuzzleSolver:
     def run_solution(self, payload: dict) -> None:
         algorithm_dispatch = {
             1: uniform_cost,
-            2: position_length_to_destiny,
-            3: board_length_to_destiny
+            2: simple_heuristic,
+            3: best_possible_heuristic
         }
 
         starting_board, result_board = self.create_board(payload.get('starting_matrix'), payload.get('result_matrix'))
