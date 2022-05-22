@@ -41,7 +41,7 @@ class PuzzleSolver:
 
         return best_expansion
 
-    def visit_board(self, board: Board, result_board: Board) -> None:
+    def visit_board(self, board: Board, result_board: Board) -> bool:
         self.__frontier = [item for item in self.__frontier if item.get_board_string() != board.get_board_string()]
         self.__visited.append(board)
 

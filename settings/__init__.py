@@ -1,6 +1,6 @@
 BOARD_SIZE = 3
 
-ALGORITHM = 3
+ALGORITHM = 1
 
 EXAMPLE_BOARD = [
     [7, 6, 2],
