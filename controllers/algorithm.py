@@ -11,11 +11,11 @@ def simple_heuristic(board: Board, result_board: Board) -> int:
     for line in board.matrix:
         for position in line:
             if position.value != 0:
-                coordenate_x, coordenate_y = position.coordenate.get_axis()
-                expected_x, expected_y = result_board.find_position_by_value(position.value).coordenate.get_axis()
+                coordinate_x, coordinate_y = position.coordinate.get_axis()
+                expected_x, expected_y = result_board.find_position_by_value(position.value).coordinate.get_axis()
                 heuristic_value += (
-                    abs(coordenate_x - expected_x) +
-                    abs(coordenate_y - expected_y)
+                    abs(coordinate_x - expected_x) +
+                    abs(coordinate_y - expected_y)
                 )
 
     return (

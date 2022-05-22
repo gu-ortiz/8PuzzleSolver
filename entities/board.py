@@ -1,6 +1,6 @@
 from __future__ import annotations
 from settings import BOARD_SIZE
-from entities.coordenate import Coordenate
+from entities.coordinate import Coordinate
 from entities.position import Position
 from entities.move import Move
 from random import randrange
@@ -47,7 +47,7 @@ class Board:
             for position_index, value in enumerate(line):
                 matrix[line_index][position_index] = Position(
                     value,
-                    Coordenate(position_index, line_index)
+                    Coordinate(position_index, line_index)
                 )
 
         return matrix
@@ -84,14 +84,14 @@ class Board:
 
     def get_possible_moves(self) -> list[Move]:
         empty_position = self.find_position_by_value(0)
-        x, y = empty_position.coordenate.get_axis()
+        x, y = empty_position.coordinate.get_axis()
         possible_moves = []
         possible_axis_changes = [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
 
         for axis in possible_axis_changes:
-            coordenate = Coordenate(axis[0], axis[1])
-            if coordenate.valid_coordenate():
-                x2, y2 = coordenate.get_axis()
+            coordinate = Coordinate(axis[0], axis[1])
+            if coordinate.valid_coordinate():
+                x2, y2 = coordinate.get_axis()
                 possible_moves.append(
                     Move(
                         empty_position,
@@ -111,8 +111,8 @@ class Board:
         new_matrix: list[list[int]] = self.get_board_int()
         new_path: list[str] = copy.deepcopy(self.__path)
 
-        x, y = move.origin.coordenate.get_axis()
-        x1, y1 = move.destiny.coordenate.get_axis()
+        x, y = move.origin.coordinate.get_axis()
+        x1, y1 = move.destiny.coordinate.get_axis()
 
         new_matrix[y][x] = copy.copy(self.__matrix[y1][x1].value)
         new_matrix[y1][x1] = copy.copy(self.__matrix[y][x].value)

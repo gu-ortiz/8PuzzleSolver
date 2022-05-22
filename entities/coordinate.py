@@ -1,7 +1,7 @@
 from settings import BOARD_SIZE
 
 
-class Coordenate:
+class Coordinate:
     def __init__(self, x: int, y: int) -> None:
         self.__x = x
         self.__y = y
@@ -25,7 +25,7 @@ class Coordenate:
     def get_axis(self) -> tuple[int, int]:
         return self.__x, self.__y
 
-    def valid_coordenate(self) -> bool:
+    def valid_coordinate(self) -> bool:
         for axis in (self.__x, self.__y):
             if axis > (BOARD_SIZE - 1) or axis < 0:
                 return False
