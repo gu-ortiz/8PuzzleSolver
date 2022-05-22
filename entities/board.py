@@ -82,7 +82,7 @@ class Board:
 
         return board
 
-    def get_possible_moves(self) -> list:
+    def get_possible_moves(self) -> list[Move]:
         empty_position = self.find_position_by_value(0)
         x, y = empty_position.coordenate.get_axis()
         possible_moves = []

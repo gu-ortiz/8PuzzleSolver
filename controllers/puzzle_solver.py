@@ -2,6 +2,7 @@ from controllers.algorithm import best_possible_heuristic, simple_heuristic, uni
 from entities.position import Position
 from entities.board import Board
 from entities.move import Move
+import time
 
 
 class PuzzleSolver:
@@ -93,6 +94,11 @@ class PuzzleSolver:
 
         self.__frontier.append(starting_board)
 
+        inicio = time.time()
+
         solution = self.resolve_board(result_board, algorithm_dispatch[payload.get('algorithm')])
 
+        fim = time.time()
+
         self.print_solution(solution)
+        print('Tempo (ms)........', (fim - inicio))
