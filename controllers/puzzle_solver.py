@@ -58,8 +58,9 @@ class PuzzleSolver:
 
     def resolve_board(self, result_board: Board, algorithm: callable) -> Board:
         while True:
-            if len(self.__frontier) > self.__frontier_highest_size:
-                self.__frontier_highest_size = len(self.__frontier)
+            self.__frontier_highest_size = len(self.__frontier) if (
+                self.__frontier_highest_size < len(self.__frontier)
+            ) else self.__frontier_highest_size
 
             board = self.get_best_expansion(result_board, algorithm)
 
