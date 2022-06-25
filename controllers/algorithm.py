@@ -1,4 +1,3 @@
-from entities.move import Move
 from entities.board import Board
 
 

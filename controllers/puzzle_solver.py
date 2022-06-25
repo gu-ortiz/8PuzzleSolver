@@ -1,7 +1,6 @@
 from controllers.algorithm import best_possible_heuristic, simple_heuristic, uniform_cost
 from entities.position import Position
 from entities.board import Board
-from entities.move import Move
 import time
 
 
